@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  before_action :set_address, only: [:show, :edit, :update,]
+  before_action :set_address, only: [:show, :destroy, :update, :edit]
   
   def index
     @addresses = current_user.addresses
@@ -12,7 +12,7 @@ class AddressesController < ApplicationController
   def create
     current_user.addresses.create!(address_params)
     flash[:notice] = "Address was successfully created."
-    redirect_to root_path
+    redirect_to addresses_url
   end
 
   def show ;end
@@ -22,7 +22,7 @@ class AddressesController < ApplicationController
   def update
     if @address.update_attributes(address_params)
       flash[:notice] = "Address was successfully updated."
-      redirect_to root_path
+      redirect_to addresses_url
     end
   end
 
@@ -39,6 +39,6 @@ class AddressesController < ApplicationController
   end
 
   def set_address
-    @address = Address.find(params[:id])
+    @address = current_user.addresses.find(params[:id])
   end
 end
