@@ -1,0 +1,26 @@
+<br>
+<h1>Address</h1>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">S.No</th>
+      <th scope="col">House No</th>
+      <th scope="col">Area</th>
+      <th scope="col">Land Mark</th>
+      <th scope="col">City</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @addresses.each do |address|%>
+    <tr>
+      <th scope="row">1</th>
+      <td><%= address.house_no %></td>
+      <td><%= address.area %></td>
+      <td><%= address.land_mark %></td>
+      <td><%= address.city %></td>
+      <td><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %></td>
+    </tr>
+  <% end %>  
+  </tbody>
+</table>

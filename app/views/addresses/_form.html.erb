@@ -1,0 +1,35 @@
+<%= form_with model: @address do |form| %>
+  <div>
+    <%= form.label :house_no %><br>
+    <%= form.text_field :house_no %>
+    <% @address.errors.full_messages_for(:house_no).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :area %><br>
+    <%= form.text_field :area %><br>
+    <% @address.errors.full_messages_for(:area).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :land_mark %><br>
+    <%= form.text_area :land_mark %><br>
+    <% @address.errors.full_messages_for(:land_mark).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :city %><br>
+    <%= form.text_field :city %><br>
+    <% @address.errors.full_messages_for(:city).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <br>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

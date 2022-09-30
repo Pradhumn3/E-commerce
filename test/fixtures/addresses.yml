@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  house_no: MyString
+  area: MyString
+  land_mark: MyString
+  user: one
+
+two:
+  house_no: MyString
+  area: MyString
+  land_mark: MyString
+  user: two
