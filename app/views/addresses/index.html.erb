@@ -1,6 +1,7 @@
 <br>
 <h1>Address</h1>
 <br>
+<h1><%= button_to "Add Address", new_address_path, method: :get, class: "btn btn-success" %></h1>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -9,17 +10,23 @@
       <th scope="col">Area</th>
       <th scope="col">Land Mark</th>
       <th scope="col">City</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
+    <%count=0%>
   <% @addresses.each do |address|%>
     <tr>
-      <th scope="row">1</th>
+      <% count = count + 1%>
+      <th scope="row"><%=count + 1%></th>
       <td><%= address.house_no %></td>
       <td><%= address.area %></td>
       <td><%= address.land_mark %></td>
       <td><%= address.city %></td>
-      <td><%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %></td>
+      <td class ="d-flex">
+        <%= button_to "Delete", address_path(address), method: :delete, class: "btn btn-danger " %>
+        <%= button_to "Edit", edit_address_path(address), method: :get, class: "btn btn-warning " %>
+      </td>
     </tr>
   <% end %>  
   </tbody>
