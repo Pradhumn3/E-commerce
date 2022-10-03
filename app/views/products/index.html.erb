@@ -4,7 +4,9 @@
     <% @products.each do |product|%>
       <div class="col-3  m-2 " style="width: auto">
         <div class="card" style="width: 20rem;">
-          <img class="card-img-top" src="https://loremflickr.com/640/360" alt="Card image cap">
+          <%if product.image.attached? %>
+            <%= image_tag(product.image, size: "300x300",alt: "Card image cap", class: "card-img-top") %> 
+          <% end %>
           <div class="card-body">
             <h5 class="card-title"><%= product.name %></h5>
             <p class="card-text"><%= product.description %></p>
