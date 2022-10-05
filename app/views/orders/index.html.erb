@@ -5,13 +5,12 @@
 
 <% @orders.each do |order| %>
   <% if order.user_id == @current_user.id %>
-    <h3>
-      <%  User.find_by(id:order.user_id) %>
-      Order ID :  <%= order.id %>
-      , User ID : <%= order.user_id %>
-    </h3>
     <table>
       <thead>
+        <tr>
+          <th>Order Id :</th>
+          <td> <%= order.id %> </td>
+        </tr>
         <tr>
           <th>Name :</th>
           <td> <%= User.find_by(id:order.user_id).name %></td>
@@ -58,6 +57,10 @@
             <td><%= item.quantity.to_i * item.product.price.to_i %></td>
           </tr>
         <% end %>
+        <tr>
+        <td colspan="3"><center><b>Total Price :</b></center></td>
+        <td colspan="2"> <center><b><%= order.sub_total %></b></center></td>
+        </tr>
         </tbody>
       </table>
     </div>
