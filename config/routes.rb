@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'orders/index'
   get 'carts/checkout'
   post 'carts_verify_payment' => 'carts#carts_verify_payment'
   root 'products#index'

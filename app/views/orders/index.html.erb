@@ -1,0 +1,67 @@
+<div class="center jumbotron">
+  <h2>User Orders : <%= @current_user.orders.count %></h2>
+</div>
+<br>
+
+<% @orders.each do |order| %>
+  <% if order.user_id == @current_user.id %>
+    <h3>
+      <%  User.find_by(id:order.user_id) %>
+      Order ID :  <%= order.id %>
+      , User ID : <%= order.user_id %>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name :</th>
+          <td> <%= User.find_by(id:order.user_id).name %></td>
+        </tr>
+      <thead>  
+      <tbody>
+        <tr>
+          <th>Email :</th>
+          <td> <%= User.find_by(id:order.user_id).email %></td>
+        </tr>
+        <tr>
+          <th>Pay_method :</th>
+          <td> Online_payment</td>
+        </tr>
+        <tr>
+          <th>Address :</th>
+          <td> <%= order.user.addresses.first.house_no%>, <%= order.user.addresses.first.area%>, <%= order.user.addresses.first.land_mark%>, <%= order.user.addresses.first.city%></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Quantity</th>
+            <th scope="col">Product Image</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% order.order_items.each do |item| %>
+          <tr>
+            <td >x <%= item.quantity %></td>
+            <% if item.product.image %>
+              <td><%= image_tag (item.product.image) , size:"64x64" %></td>
+            <% else %>
+              <td><%= image_tag "no_image.png", size:"64x64" %></td>
+            <% end %>
+            <td><%= item.product.name %></td>
+            <td><%= item.product.description %></td>
+            <td><%= item.quantity.to_i * item.product.price.to_i %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+  <hr/>
+  <br>
+<% end %>
