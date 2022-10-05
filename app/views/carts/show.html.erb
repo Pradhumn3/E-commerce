@@ -97,7 +97,7 @@
             <%= button_to "Empty cart", cart_path(@current_cart),method: :delete, data: {confirm: "Are you sure?"} , class: "btn btn-lg btn-block btn-warning text-uppercase"%>
           </div>
           <div class="col-sm-12 col-md-4 text-right">
-            <%= button_to "Checkout" , method: :get,class: "btn btn-lg btn-block btn-success text-uppercase"%>
+            <%= button_to "Checkout", carts_checkout_path , params: { cart: @cart, amount: @cart.sub_total}, method: :get, class: "btn btn-lg btn-block btn-primary text-uppercase"%>
           </div>
         <% end %>
       </div>

@@ -8,10 +8,47 @@ class CartsController < ApplicationController
     redirect_to root_path
   end
 
+  def checkout
+    amount = params[:amount].to_i * 100
+    @order = RazorpayServices.create_order(amount) 
+  end
+
+  def carts_verify_payment
+    payment_response ={
+      :razorpay_order_id   => params[:razorpay_order_id] ,
+      :razorpay_payment_id => params[:razorpay_payment_id],
+      :razorpay_signature  => params[:razorpay_signature]
+    }
+    confirm = Razorpay::Utility.verify_payment_signature(payment_response)
+    if confirm
+      create_order(payment_response)
+      empty_cart
+      flash[:notice] = " Order successfully created."
+      redirect_to root_path
+    else
+      flash[:notice] = "Error created."
+      redirect_to root_path
+    end
+  end
+
   private
 
-  # Never trust parameters from the scary internet
-  # , only allow the white list through.
+  def create_order(payment_response)
+    @order = current_user.orders.new(payment_response)
+    if @order.save!
+    @current_cart.line_items.each do |line_item|
+      @order.order_items.create!(         
+         product_id: line_item.product_id,
+         quantity:   line_item.quantity 
+      )
+      end
+    end
+  end
+
+  def empty_cart
+    @current_cart.line_items.destroy_all
+  end
+  
   def cart_params
     params.require(:cart).permit(:user_id)
   end
