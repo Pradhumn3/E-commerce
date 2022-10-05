@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :set_cart, if: :controller?
 
   def controller?
-    %w[carts line_items order_items products].include? params["controller"]
+    %w[carts line_items orders products].include? params["controller"]
   end
   
   private

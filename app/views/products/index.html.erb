@@ -1,8 +1,4 @@
-<h1><%= button_to "Add Product", new_product_path, method: :get, class: "btn btn-success" %></h1>
-<div style= " height: 50px;
-    width: 100px;
-    float: right;
-    display: block;"><%= link_to "Cart", cart_path(@current_cart), class: "btn btn-info width: 100px"%></div>
+<h1><%= link_to "Basket", cart_path(@current_cart), method: :get, class: "btn btn-info ", style: "width: 100px; height: 50px; margin: 20px; padding-top: 11px;" %></h1>
 <div class="container">
   <div class="row">
     <% @products.each do |product|%>
