@@ -1,9 +1,9 @@
 <h1><%= link_to "Basket", cart_path(@current_cart), method: :get, class: "btn btn-info ", style: "width: 100px; height: 50px; margin: 20px; padding-top: 11px;" %></h1>
 <div class="container">
-  <div class="row">
+  <div class="row p-2">
     <% @products.each do |product|%>
-      <div class="col-3  m-2 " style="width: auto">
-        <div class="card" style="width: 20rem;">
+      <div class="col-3" >
+        <div class="card" >
           <%if product.image.attached? %>
             <%= image_tag(product.image, size: "300x300",alt: "Card image cap", class: "card-img-top") %> 
           <% end %>
@@ -21,7 +21,18 @@
             <% end %>
           </div>
         </div>
+        <br>
     </div>
     <% end %>
+  </div>
+  <div class="container row margin-twenty5-zero margin-b-zero pagination-row">
+    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-6 padding-zero">
+      <ul class="pagination">
+        <li class="disabled"> <%= will_paginate(@products,:previous_label => "&laquo;", :next_label => "&raquo;",:class=>"small-font",:outer_window => 1,:inner_window => 0) %></li>
+      </ul>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-5 col-xs-6 pagination-info">
+      <span class="pull-right"><%= page_entries_info(@products) %></span>
+    </div>
   </div>
 </div>
