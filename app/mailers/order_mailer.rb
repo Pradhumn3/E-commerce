@@ -1,6 +1,5 @@
 class OrderMailer < ApplicationMailer
   def user_order(user,order)
-    byebug
     @user = user
     @order = order
     mail(

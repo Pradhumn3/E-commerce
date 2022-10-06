@@ -1,70 +1,78 @@
-<div class="center jumbotron">
-  <h2>User Orders : <%= @current_user.orders.count %></h2>
-</div>
-<br>
-
-<% @orders.each do |order| %>
-  <% if order.user_id == @current_user.id %>
-    <table>
-      <thead>
-        <tr>
-          <th>Order Id :</th>
-          <td> <%= order.id %> </td>
-        </tr>
-        <tr>
-          <th>Name :</th>
-          <td> <%= User.find_by(id:order.user_id).name %></td>
-        </tr>
-      <thead>  
-      <tbody>
-        <tr>
-          <th>Email :</th>
-          <td> <%= User.find_by(id:order.user_id).email %></td>
-        </tr>
-        <tr>
-          <th>Pay_method :</th>
-          <td> Online_payment</td>
-        </tr>
-        <tr>
-          <th>Address :</th>
-          <td> <%= order.user.addresses.first.house_no%>, <%= order.user.addresses.first.area%>, <%= order.user.addresses.first.land_mark%>, <%= order.user.addresses.first.city%></td>
-        </tr>
-      </tbody>
-    </table>
-    <br>
-    <div>
-      <table class="table table-bordered">
+<style>
+.box{
+  margin: 50px;
+  margin-top: -1px;
+  padding: 50px;
+}
+</style>
+<div class= "box">
+  <div class="center jumbotron">
+    <h2>User Orders : <%= @current_user.orders.count %></h2>
+  </div>
+  <br>
+  <% @orders.each do |order| %>
+    <% if order.user_id == @current_user.id %>
+      <table>
         <thead>
           <tr>
-            <th scope="col">Quantity</th>
-            <th scope="col">Product Image</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
+            <th>Order Id :</th>
+            <td> <%= order.id %> </td>
           </tr>
-        </thead>
-        <tbody>
-        <% order.order_items.each do |item| %>
           <tr>
-            <td >x <%= item.quantity %></td>
-            <% if item.product.image %>
-              <td><%= image_tag (item.product.image) , size:"64x64" %></td>
-            <% else %>
-              <td><%= image_tag "no_image.png", size:"64x64" %></td>
-            <% end %>
-            <td><%= item.product.name %></td>
-            <td><%= item.product.description %></td>
-            <td><%= item.quantity.to_i * item.product.price.to_i %></td>
+            <th>Name :</th>
+            <td> <%= User.find_by(id:order.user_id).name %></td>
           </tr>
-        <% end %>
-        <tr>
-        <td colspan="3"><center><b>Total Price :</b></center></td>
-        <td colspan="2"> <center><b><%= order.sub_total %></b></center></td>
-        </tr>
+        <thead>  
+        <tbody>
+          <tr>
+            <th>Email :</th>
+            <td> <%= User.find_by(id:order.user_id).email %></td>
+          </tr>
+          <tr>
+            <th>Pay_method :</th>
+            <td> Online_payment</td>
+          </tr>
+          <tr>
+            <th>Address :</th>
+            <td> <%= order.user.addresses.first.house_no%>, <%= order.user.addresses.first.area%>, <%= order.user.addresses.first.land_mark%>, <%= order.user.addresses.first.city%></td>
+          </tr>
         </tbody>
       </table>
-    </div>
+      <br>
+      <div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Quantity</th>
+              <th scope="col">Product Image</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% order.order_items.each do |item| %>
+            <tr>
+              <td >x <%= item.quantity %></td>
+              <% if item.product.image %>
+                <td><%= image_tag (item.product.image) , size:"64x64" %></td>
+              <% else %>
+                <td><%= image_tag "no_image.png", size:"64x64" %></td>
+              <% end %>
+              <td><%= item.product.name %></td>
+              <td><%= item.product.description %></td>
+              <td><%= item.quantity.to_i * item.product.price.to_i %></td>
+            </tr>
+          <% end %>
+          <tr>
+          <td colspan="3"><center><b>Total Price :</b></center></td>
+          <td colspan="2"> <center><b><%= order.sub_total %></b></center></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+    <hr/>
+    <br>
   <% end %>
-  <hr/>
-  <br>
-<% end %>
+</div>
