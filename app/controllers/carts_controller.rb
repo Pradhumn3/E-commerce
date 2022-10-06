@@ -42,7 +42,8 @@ class CartsController < ApplicationController
          quantity:   line_item.quantity 
       )
       end
-    end
+    end 
+    OrderMailer.user_order(current_user, @order).deliver
   end
 
   def empty_cart
