@@ -4,8 +4,8 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
+  config.skip_before_action :authenticate_user!
   config.site_title = "E Commerce"
-
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
