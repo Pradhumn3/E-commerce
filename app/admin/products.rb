@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :name, :price, :description, :quantity, :image
+  permit_params :name, :price, :description, :quantity, :image, :category_id
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -26,6 +26,9 @@ ActiveAdmin.register Product do
     column :price
     column :description
     column :quantity
+    column :category_id do |obj|
+      obj&.category&.name
+    end
     actions
   end
 
@@ -42,11 +45,14 @@ ActiveAdmin.register Product do
   end
 
   form do |f|
-    f.inputs :name
-    f.inputs  :price
-    f.inputs  :description
-    f.inputs  :quantity
-    f.input :image, as: :file
+    f.inputs do
+      f.input :category_id, as: :select, collection: Category.all.collect { |category| [category.name, category.id] }
+      f.input :name
+      f.input :price
+      f.input :description
+      f.input :quantity
+      f.input :image, as: :file
+    end
     f.actions
   end
 end
