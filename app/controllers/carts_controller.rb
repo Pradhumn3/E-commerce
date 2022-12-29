@@ -9,17 +9,16 @@ class CartsController < ApplicationController
   end
 
   def checkout
-    amount = params[:amount].to_i * 100
-    @order = RazorpayServices.create_order(amount) 
+    @order = RazorpayServices.create_order(params[:amount].to_i * 100) 
   end
 
   def carts_verify_payment
     payment_response ={
-      :razorpay_order_id   => params[:razorpay_order_id] ,
-      :razorpay_payment_id => params[:razorpay_payment_id],
-      :razorpay_signature  => params[:razorpay_signature]
-    }
-    confirm = Razorpay::Utility.verify_payment_signature(payment_response)
+      razorpay_order_id: params[:razorpay_order_id], 
+      razorpay_payment_id: params[:razorpay_payment_id], 
+      razorpay_signature: params[:razorpay_signature]
+      }
+    confirm = RazorpayServices.verify_payment_status(payment_response)
     if confirm
       create_order(payment_response)
       empty_cart
