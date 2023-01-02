@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'carts/checkout'
   post 'carts_verify_payment' => 'carts#carts_verify_payment'
   root 'products#index'
-  resources :products
+  resources :products 
   resources :addresses
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -17,5 +17,7 @@ Rails.application.routes.draw do
   post 'line_items' => 'line_items#create'
   get 'line_items/:id' => 'line_items#show', as: 'line_item'
   delete 'line_items/:id' => 'line_items#destroy'
+  post '/subscriptions' => 'products#subscriptions'
+  post '/success_subscriptions' => 'products#success_subscriptions'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

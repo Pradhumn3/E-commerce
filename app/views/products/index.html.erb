@@ -1,3 +1,62 @@
+<style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .columns {
+      float: left;
+      width: 33.3%;
+      padding: 8px;
+    }
+
+    .price {
+      list-style-type: none;
+      border: 1px solid #eee;
+      margin: 0;
+      padding: 0;
+      -webkit-transition: 0.3s;
+      transition: 0.3s;
+    }
+
+    .price:hover {
+      box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+    }
+
+    .price .header {
+      background-color: #111;
+      color: white;
+      font-size: 25px;
+    }
+
+    .price li {
+      border-bottom: 1px solid #eee;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .price .grey {
+      background-color: #eee;
+      font-size: 20px;
+    }
+
+    .button {
+      background-color: #191324;
+      border: none;
+      color: white;
+      padding: 10px 25px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .columns {
+        width: 100%;
+      }
+    }
+    </style>
+
+
 <h1><%= link_to "Basket", cart_path(@current_cart), method: :get, class: "btn btn-info ", style: "width: 100px; height: 50px; margin: 20px; padding-top: 11px;" %><%=current_user.name%></h1>
 <div class="container">
  <%= form_tag(products_path, method: :get) do %>
@@ -42,3 +101,22 @@
     </div>
   </div>
 </div>
+
+
+<h2 style="text-align:center">Plan Details</h2>
+<p style="text-align:center">select plan according to your wish</p>
+<div class = "container">
+  <% @plans.each do |plan|%>
+    <div class="columns">
+      <ul class="price">
+        <li class="header" style="background-color:#3d244a"><%= plan.billing_cycle %> Months </li>
+        <li class="grey"><%= plan.amount%> ₹</li>
+        <li><%= plan.description %></li>
+        <li><%= plan.billing_cycle %></li>
+        <li><%= plan.period.titleize %></li>
+        <li><%= link_to "Subscribe", subscriptions_path(id: plan.id), method: :post, class: "button" %></li>
+      </ul>
+    </div>
+  <% end %>
+</div>
+

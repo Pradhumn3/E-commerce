@@ -14,7 +14,7 @@ if Rails.env.development?
 end
 
 user = User.find_or_initialize_by(email: 'example@ecommerce.com').tap do |u|
-  u.name = 'example'
+  u.name = 'example'  
   u.email = 'example@ecommerce.com'
   u.password = 123456
   u.phone_no = 9000900090
