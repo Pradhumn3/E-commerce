@@ -2,8 +2,8 @@ class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success_subscriptions]
   def index
     @plans = Plan.all
-    @products = if params[:category].present?
-                  Product.where(category_id: params[:category][:id]).paginate(:page => params[:page], :per_page => 8) 
+    @products = if params[:category_id].present?
+                  Product.where(category_id: params[:category_id]).paginate(:page => params[:page], :per_page => 8) 
                 else
                   Product.paginate(:page => params[:page], :per_page => 8)
                 end

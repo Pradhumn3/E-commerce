@@ -58,11 +58,15 @@
 
 
 <h1><%= link_to "Basket", cart_path(@current_cart), method: :get, class: "btn btn-info ", style: "width: 100px; height: 50px; margin: 20px; padding-top: 11px;" %><%=current_user.name%></h1>
-<div class="container">
- <%= form_tag(products_path, method: :get) do %>
-    <%= collection_select :category, :id, Category.all.order('name ASC'), :id, :name,{include_blank: 'Select Category', onchange: "this.form.submit();"} %>
-    <%= submit_tag 'Search', name: nil %>
-<% end %>
+<form class="d-flex">
+  <%= form_with url: '/product/index', method: :get, local: true do |form| %>
+      <h6 style="color:white;">Categories :</h6> &nbsp
+      <div class="form-group">
+        <%= form.collection_select(:category_id, Category.all.order('name ASC'), :id, :name, {include_blank: true} , onchange: "this.form.submit();")  %>
+      </div> &nbsp &nbsp
+  <% end %> 
+</form>
+
 </div>
 <div class="container">
   <div class="row p-2"> 
