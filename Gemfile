@@ -26,6 +26,8 @@ gem 'devise'
 gem 'activeadmin'
 gem 'razorpay'
 gem 'jquery-rails'
+# gem 'arctic_admin'
+gem 'arctic_admin', '~> 3.3'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem "will_paginate", "~> 3.0"
