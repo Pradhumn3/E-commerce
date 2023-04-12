@@ -35,11 +35,11 @@ class CartsController < ApplicationController
   def create_order(payment_response)
     @order = current_user.orders.new(payment_response)
     if @order.save!
-    @current_cart.line_items.each do |line_item|
-      @order.order_items.create!(         
-         product_id: line_item.product_id,
-         quantity:   line_item.quantity 
-      )
+      @current_cart.line_items.each do |line_item|
+        @order.order_items.create!(         
+          product_id: line_item.product_id,
+          quantity:   line_item.quantity 
+        )
       end
     end 
     OrderMailer.user_order(current_user, @order).deliver

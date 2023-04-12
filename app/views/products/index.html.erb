@@ -83,8 +83,11 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><%= product.price %> ₹</li>
           </ul>
+           <ul class="list-group list-group-flush">
+            <li class="list-group-item stock" id=<%= product.quantity %>>Quantity: <%= product.quantity %></li>
+          </ul>
           <div class="card-body">
-            <%=button_to line_items_path(:product_id => product.id),data: { confirm: "successfully added to your basket" }, class: "btn btn-warning" , style: "margin-top:15px;" , params:{productID: product.id} do %>
+            <%=button_to line_items_path(:product_id => product.id),data: { confirm: "successfully added to your basket" }, class: "btn btn-warning pro_button", id: "#{product.quantity}" , style: "margin-top:15px;" , params:{productID: product.id} do %>
             <i class="glyphicon glyphicon-plus" style="color:black;"></i>
               Add to Basket
             <% end %>
@@ -124,3 +127,25 @@
   <% end %>
 </div>
 
+
+<script>
+  $(document).ready(function(){
+    $(".stock").each(function( index ) {
+      if (this.id == 0){
+        $(this).css("color","red")
+        // $('#basket_btn').css('display', "none")
+      }
+      else if(this.id < 5){
+        $(this).css("color","yellow")
+      }
+      else if(this.id >= 5){
+        $(this).css("color","green")
+      }
+    });
+    $(".pro_button").each(function( index ) {
+      if (this.id == 0){
+        $(this).attr("disabled", true);
+      }
+    });
+  });
+</script>

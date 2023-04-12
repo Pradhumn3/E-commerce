@@ -21,8 +21,6 @@ ActiveAdmin.register User do
   filter :name
   filter :email
   filter :phone_no
-  filter :created_at
-  filter :updated_at
 
   index do
     selectable_column
