@@ -1,7 +1,7 @@
 class RazorpayServices
   require "razorpay"
-  Razorpay.setup('rzp_test_vTgfIDIOx2szl2', 'peaV1I4tadzKLev5ro8BYGqy')
-  # Razorpay.setup('rzp_test_KheZPJKthD8PeV', 'KkCcYBNS2YeOCK5acFeJbVzH')
+  # Razorpay.setup('rzp_test_vTgfIDIOx2szl2', 'peaV1I4tadzKLev5ro8BYGqy')
+  Razorpay.setup('rzp_test_2YJCXrE5L31KX2', 't9kWircsvvNTb2jvhKgOqY77')
   class << self
     def create_order(amount)    
       @amount = amount
