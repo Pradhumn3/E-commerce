@@ -20,9 +20,7 @@ class ProductsController < ApplicationController
     crate_user_subcription if @sub_id.present? 
     redirect_to @response.short_url
   end
-  # def success_subscriptions
-    # byebug
-  # end
+  
   def crate_user_subcription
     UserSubcription.create(user_id: current_user.id, subscription_id: @sub_id)
   end
