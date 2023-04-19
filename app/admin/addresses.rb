@@ -1,6 +1,6 @@
 ActiveAdmin.register Address do
   # filter :user_id, :as => :string
-  filter :user_id, :as => :select, :collection => User.all.map {|user| [user.name, user.id]}
+  filter :user_id, :as => :select, :collection => Proc.new {User.all.map {|user| [user.name, user.id]}}
   filter :house_no, :as => :string
   filter :area, :as => :string
   filter :land_mark, :as => :string

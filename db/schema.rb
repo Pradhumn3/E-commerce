@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_060425) do
+ActiveRecord::Schema.define(version: 2023_01_02_072303) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,12 @@ ActiveRecord::Schema.define(version: 2022_10_05_060425) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "cart_id", null: false
@@ -109,11 +115,31 @@ ActiveRecord::Schema.define(version: 2022_10_05_060425) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string "plan_name"
+    t.string "description"
+    t.string "period"
+    t.string "billing_cycle"
+    t.string "amount"
+    t.string "razorpay_plan_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "price"
     t.string "description"
     t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "user_subcriptions", force: :cascade do |t|
+    t.string "subscription_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -128,6 +154,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_060425) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "phone_no"
+    t.string "razorpay_customer_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
