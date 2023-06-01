@@ -68,6 +68,7 @@
           <td colspan="3"><center><b>Total Price :</b></center></td>
           <td colspan="2"> <center><b><%= order.sub_total %></b></center></td>
           </tr>
+          <tr> <%= button_to "Download invoice", orders_download_invoice_path(id: order,format: :pdf), method: :post, :formtarget => "_blank" %> </tr>
           </tbody>
         </table>
       </div>

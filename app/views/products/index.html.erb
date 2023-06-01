@@ -121,7 +121,7 @@
         <li><%= plan.description %></li>
         <li><%= plan.billing_cycle %></li>
         <li><%= plan.period.titleize %></li>
-        <li><%= link_to "Subscribe", subscriptions_path(id: plan.id), method: :post, class: "button" %></li>
+        <li><%= button_to "Subscribe", subscriptions_path(id: plan.id), method: :post , class: "button" %></li>
       </ul>
     </div>
   <% end %>
