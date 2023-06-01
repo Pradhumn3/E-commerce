@@ -1,5 +1,8 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/sidekiq'
   get 'orders/index'
+  post 'orders/download_invoice'
   get 'carts/checkout'
   post 'carts_verify_payment' => 'carts#carts_verify_payment'
   root 'products#index'

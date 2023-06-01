@@ -28,10 +28,17 @@
           <%= link_to "Order", orders_index_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          <%= button_to "Logout", destroy_user_session_path, method: :delete , class: "nav-link logout_button" %>
         </li>
       <% end %>
       
     </ul>
   </div>
 </nav>
+<style>
+  .logout_button {
+    outline: none !important;
+    border: none;
+    background: #c1c1c100;
+  }
+</style>
